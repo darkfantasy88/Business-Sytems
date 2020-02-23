@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Autofac;
 namespace ALT_R_ManagerLibrary.DataAccess
 {
-    public class Dependency_Inversion_Principle:Module
+    public class Dependency_Inversion_Principle
     {
         ContainerBuilder builder;
         IContainer container;
