@@ -34,6 +34,8 @@ namespace ALT_R_ManagerLibrary.DataAccess
         public void RegisterInstance<T,U>(T _interface,U _implementation)
         {
             builder.RegisterType<U>().As<T>();
+            container = builder.Build();
+
         }
 
         public T GetInstanceOf<T>()
