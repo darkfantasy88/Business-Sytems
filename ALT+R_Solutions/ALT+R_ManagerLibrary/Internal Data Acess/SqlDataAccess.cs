@@ -17,8 +17,9 @@ namespace ALT_R_ManagerLibrary.Internal_Data_Acess
             return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }
 
-        public IEnumerable<T> RetrieveData<T,U>(string storedProcedure,U paramaters,string connectionName)
+        public IEnumerable<T> RetrieveDataUsingConfig<T,U>(string storedProcedure,U paramaters,string connectionName)
         {
+            
             var connectionString = GetConnectStringFromConfig(connectionName);
 
             using (IDbConnection dbConnection=new SqlConnection(connectionString))
@@ -27,14 +28,31 @@ namespace ALT_R_ManagerLibrary.Internal_Data_Acess
                 return rows;
             }
         }
+        public IEnumerable<T> RetrieveData<T, U>(string storedProcedure, U paramaters, string connectionString)
+        {
 
-        public async void SaveData(string storedProcedure,string connectionName)
+
+            using (IDbConnection dbConnection = new SqlConnection(connectionString))
+            {
+                var rows = dbConnection.Query<T>(storedProcedure, paramaters, commandType: CommandType.StoredProcedure).ToList();
+                return rows;
+            }
+        }
+        public async void SaveDataUsingConfig(string storedProcedure,string connectionName)
         {
             var connectionString = GetConnectStringFromConfig(connectionName);
 
             using (IDbConnection dbConnection = new SqlConnection(connectionString))
             {
                 await dbConnection.ExecuteAsync(storedProcedure,commandType: CommandType.StoredProcedure);                
+            }
+        }
+        public async void SaveData(string storedProcedure, string connectionString)
+        {
+
+            using (IDbConnection dbConnection = new SqlConnection(connectionString))
+            {
+                await dbConnection.ExecuteAsync(storedProcedure, commandType: CommandType.StoredProcedure);
             }
         }
     }

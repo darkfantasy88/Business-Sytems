@@ -8,8 +8,19 @@ namespace ALT_R_ManagerLibrary.DataAccess
 {
     public class Dependency_Inversion_Principle
     {
-        ContainerBuilder builder;
-        IContainer container;
+        private ContainerBuilder builder;
+        private IContainer container;
+        public delegate void EventAggregatorHandler(object source, ConsoleBuilderArgs e);
+        public event EventAggregatorHandler EventAgrregator;
+
+
+        protected virtual void RegisterInstance()
+        {
+            if (EventAgrregator != null)
+            {
+                EventAgrregator(this, new ConsoleBuilderArgs() { Builder=this.builder});
+            }
+        }
         public Dependency_Inversion_Principle()
         {
              builder= new ContainerBuilder();

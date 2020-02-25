@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\Dependency_Inversion_Principle.cs" />
+    <Compile Include="DataAccess\ConsoleBuilderArgs.cs" />
     <Compile Include="Internal Data Acess\SqlDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
