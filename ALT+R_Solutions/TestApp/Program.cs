@@ -15,7 +15,11 @@ namespace TestApp
             ApiHelper.InitializeClient();
             //Console.Write("What is your first name:");
             //var data = GetData(Console.ReadLine()).Result;
-            var data = GetData().Result;
+            CreatePrioners_STUPID();
+
+
+
+            var data = GetData();
             for (int i = 0; i < data.Count(); i++)
             {
                 Console.WriteLine(data[i].ID);
@@ -28,18 +32,35 @@ namespace TestApp
 
         }
 
-        static async Task<PrisonerModel> GetData(string fname)
+        static void CreatePrioners_STUPID()
         {
-            var prioners= await MyApiProcessor.LoadData(fname);
+            //for (int i = 0; i < 3; i++)
+            //{
+                Console.Write("First Name: ");
+                var fname=Console.ReadLine();
+                Console.Clear();
+                Console.Write("Last Name: ");
+                var lname = Console.ReadLine();
+                InsertData(fname, lname);
+            //}
+        }
+
+        static PrisonerModel GetData(int id)
+        {
+            var prioners= MyApiProcessor.LoadPrisonerByID(id).Result;
 
             return prioners;
         }
-        static async Task<IList<PrisonerModel>> GetData()
+        static IList<PrisonerModel> GetData()
         {
-            var prioners = await MyApiProcessor.LoadData();
+            var prioners = MyApiProcessor.LoadPrisonerData().Result;
 
             return prioners.ToList();
         }
 
+        static void InsertData(string fname,string lname)
+        {
+            MyApiProcessor.InsertPrisoner(fname,lname);
+        }
     }
 }

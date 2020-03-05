@@ -5,9 +5,9 @@ using System.Web;
 
 namespace ALT_R_WebApi.Models
 {
-    public class PrisonerModel
+    public class PrisonerModel : IPrisonerModel
     {
-        public int ID { get; set; }
+        public int PrisonerID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }
