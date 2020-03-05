@@ -4,6 +4,6 @@
 AS
 begin
 set nocount on;
-	SELECT * from dbo.PrisonerTbl where ID=@ID;
+	SELECT * from dbo.PrisonerTbl where PrisonerID=@ID;
 
 end

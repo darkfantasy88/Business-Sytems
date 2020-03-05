@@ -3,7 +3,7 @@
     public interface IPrisonerModel
     {
         string FirstName { get; set; }
-        int ID { get; set; }
+        int PrisonerID { get; set; }
         string LastName { get; set; }
     }
 }
